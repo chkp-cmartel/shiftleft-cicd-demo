@@ -34,3 +34,13 @@ jobs:
         run: |
           echo Add other actions to build,
           echo test, and deploy your project.
+      
+      # Runs shiftleft source code scan on demo-app repo
+      - name: Run ShiftLeft Source Code Scan
+        env: 
+          CHKP_CLOUDGUARD_ID: ${{ secrets.CHKP_CLOUDGUARD_ID }}
+          CHKP_CLOUDGUARD_SECRET: ${{ secrets.CHKP_CLOUDGUARD_SECRET }}
+        run: |
+          chmod +x ./shiftleft
+          git clone https://github.com/chkp-rolandop/demo-app
+          ./shiftleft code-scan -sevt 4 -s ./demo-app
